@@ -22,5 +22,14 @@ Each workout will consist of multiple exercises that they can then see detailed 
 - As a user, I will be able to enter and keep track of my weights from previous performance
 - As a user, I will be able to select links to progressions and regressions if available
 
+### WireFrames:
+Login Page: <img src = "https://i.imgur.com/c8rF010.jpg">
+Dashboard: <img src = "https://i.imgur.com/tsxoXro.jpg">
+Body Segments: <img src = "https://i.imgur.com/HXuVRnF.jpg">
+Created by user: <img src = "https://i.imgur.com/8lvI3mX.jpg">
+Workout: <img src = "https://i.imgur.com/07rFLFR.jpg">
+Individual Exercise: <img src = "https://i.imgur.com/bGUhSUb.jpg.jpg">
+
+
 #### ICEBOX:
 - body part selector

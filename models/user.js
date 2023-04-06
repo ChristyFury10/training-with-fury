@@ -1,5 +1,9 @@
 // require mongoose, already connected in connection.js in db folder in
-const {model, Schema} = require("../db/connection");
+// const {model, Schema} = require("../db/connection");
+const mongoose = require("mongoose")
+
+let Schema = mongoose.Schema;
+let model = mongoose.model;
 
 const Exercise = new Schema({
     name: String, 

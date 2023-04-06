@@ -1,11 +1,11 @@
 const {model, Schema} = require("../db/connection");
 
-const premadeExercise = new Schema ({
+const premadeExerciseSchema = new Schema ({
     name: String, 
     description: String,
     tags: [],
     img: String,
-    progression: String,
+    progression: String, /// follow same logic as line 11
     regression: String,
     prevResistance: Number, 
     user: {type: Schema.Types.ObjectId, ref: "User"}
@@ -15,12 +15,12 @@ const premadeWorkoutSchema = new Schema ({
     name: String, 
     description: String,
     tags: [],
-    exercises: [premadeExercise],
+    exercises: [premadeExerciseSchema],
     user: {type: Schema.Types.ObjectId, ref: "User"}
 }, {timeStamps: true});
 
 
 
-const premadeWorkout = model("premade", premadeWorkoutSchema)
+const premadeWorkout = model("Premade", premadeWorkoutSchema)
 
 module.exports = premadeWorkout;
