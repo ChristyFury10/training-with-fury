@@ -33,3 +33,25 @@ Individual Exercise: <img src = "https://i.imgur.com/bGUhSUb.jpg.jpg">
 
 #### ICEBOX:
 - body part selector
+
+
+Schemas:
+const premadeExerciseSchema = new Schema ({
+    name: String, 
+    description: String,
+    tags: [],
+    img: String,
+    progression: String, 
+    regression: String,
+    prevResistance: Number, 
+    user: {type: Schema.Types.ObjectId, ref: "User"}
+})
+
+const premadeWorkoutSchema = new Schema ({
+    name: String, 
+    description: String,
+    tags: [],
+    exercises: [{type: Schema.Types.ObjectName, ref: "premadeExerciseSchema"}],
+    user: {type: Schema.Types.ObjectId, ref: "User"}
+});
+

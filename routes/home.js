@@ -9,7 +9,7 @@ router.get("/", (req, res)=>{
     res.render("home")
 });
 
-router.get("/dashboard ", (req, res)=>{
+router.get("/dashboard", async (req, res)=>{
     res.render("dashboard")
 })
 

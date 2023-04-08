@@ -29,8 +29,7 @@ router.post("/signup", async (req, res)=>{
 
 // login route (/auth/login)
 router.get("/login", (req, res)=>{
-    res.send("login page")
-    // res.render("auth/login")
+    res.render("auth/login")
 });
 
 
@@ -39,14 +38,17 @@ router.post("/login", async (req, res)=>{
     try{
     // check if user exists already
     const user = await User.findOne({username: req.body.username});
+    console.log(user)
     if (user){
         const result = await bcrypt.compare(req.body.password, user.password);
+        console.log(result)
         if (result){ // if compared passwords match...
             req.session.user = {
                 username: user.username,
                 id: user._id
             };
-            res.redirect("/dashboard")
+            console.log("matched")
+            
         }
         else{res.status(400).json({error: "password does not match"})}
     }
@@ -55,9 +57,16 @@ router.post("/login", async (req, res)=>{
     }
     }
     catch(error){
-        res.status(400).json(error)
+        res.status(400).json({error: "unable to log in"})
     }
-    
-})
+
+});
+
+router.get("/logout", (req, res)=>{
+    req.session.user = null;
+    res.redirect("/login")
+});
+
+
 
 module.exports = router;

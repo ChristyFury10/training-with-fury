@@ -5,9 +5,9 @@ const premadeExerciseSchema = new Schema ({
     description: String,
     tags: [],
     img: String,
-    progression: String, /// follow same logic as line 11
-    regression: String,
-    prevResistance: Number, 
+    // progression: String, /// follow same logic as line 11
+    // regression: String,
+    // prevResistance: Number, 
     user: {type: Schema.Types.ObjectId, ref: "User"}
 })
 
@@ -15,7 +15,7 @@ const premadeWorkoutSchema = new Schema ({
     name: String, 
     description: String,
     tags: [],
-    exercises: [premadeExerciseSchema],
+    exercises: [{type: Schema.Types.ObjectName, ref: "premadeExerciseSchema"}],
     user: {type: Schema.Types.ObjectId, ref: "User"}
 }, {timeStamps: true});
 
