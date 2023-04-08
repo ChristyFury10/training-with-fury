@@ -22,26 +22,28 @@ const premadeExercises = [
         description: "lift heels",
         tags: ["ankles", "calves", "lower-body"],
         img: String,
-        },
+        }
 ]
 
-const premadeWorkouts = [
-    {
-        name: arms, 
-        description: String,
-        tags: [],
-        exercises: {type: Schema.Types.}
-    },
-    {
-        name: legs, 
-        description: String,
-        tags: [],
-        exercises: [premadeExercises]
-    },
-    {
-        name: core, 
-        description: String,
-        tags: [],
-        exercises: [premadeExercises]
-    }
-]
+module.exports = premadeExercises;
+
+// const premadeWorkouts = [
+//     {
+//         name: arms, 
+//         description: String,
+//         tags: [],
+//         // exercises: {type: Schema.Types.}
+//     },
+//     {
+//         name: legs, 
+//         description: String,
+//         tags: [],
+//         exercises: [premadeExercises]
+//     },
+//     {
+//         name: core, 
+//         description: String,
+//         tags: [],
+//         exercises: [premadeExercises]
+//     }
+// ]
