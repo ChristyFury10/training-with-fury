@@ -20,6 +20,11 @@ router.get("/premade", async (req, res)=>{
     res.render("premade_index", {exercises})
 })
 
+router.get("/images", async (req, res)=>{
+    const exercises = await Exercise.find({});
+    res.render("image_index", {exercises})
+})
+
 router.get('/seed', async (req, res) => {
 	await Exercise.deleteMany({});
 	await Exercise.create(seedExercises);
