@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const authRouter = require("./auth")
 const seedExercises = require("../db/seed.js");
-const Exercise = require("../models/exercise.js")
+const Exercise = require("../models/exercise.js");
+const UserExercise = require("../models/userExercise.js");
+const userRouter = require("./userCreated")
 
 //middleware
 router.use("/auth", authRouter);
+router.use("/user", userRouter);
 
 
 router.get("/", (req, res)=>{
@@ -47,6 +50,8 @@ router.get("/core", async (req, res)=>{
     const coreExercises= await 
     Exercise.find( { $or:[ {'tags': "core"}, {'tags':"abs"} ]});
     res.render("core.ejs", {coreExercises})
-})
+});
+
+
 
 module.exports = router;

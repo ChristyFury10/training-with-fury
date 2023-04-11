@@ -1,0 +1,9 @@
+<%- include ("./header.ejs") %>
+
+<h2>User created exercises:</h2>
+
+<% for (exercise of userExercises) { %>
+
+        <a href="/user/<%=exercise._id%>" ><h3><%= exercise.name %></h3></a>
+
+<%}%>

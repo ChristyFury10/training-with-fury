@@ -1,0 +1,12 @@
+<%- include ("./header.ejs") %>
+
+<main>
+    <form action="/user/add-new" method="post">
+        <label>Name:<input type="text" name="name" placeholder="Exercise Name" /></label><br>
+        <label>Description:<input type="text" name="description" placeholder="Enter a description"></label><br>
+        <label>Tags (separate by comma):<input type="text" name="tags" placeholder="tags"></label><br>
+        <label>Image:<input type="text" name="img" placeholder="image url"></label>
+        <input type="submit" value="add">
+
+    </form>
+</main>
