@@ -7,11 +7,9 @@
 <%=exercise.tags %>
 </h3>
 <img src="<%=exercise.img%>" >
-<!-- <a href="/edit/<%=exercise._id%>"><button>Edit this exercise</button></a>
-<a href="/delete/<%=exercise._id%>"><button>Remove this exercise</button></a> -->
-
+<a href="/user/<%= exercise._id %>/edit"><button>Edit this exercise</button></a>
 <form action="/user/<%= exercise._id %>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete"/>
+<input type="submit" value="Delete"/>
   </form>
 
 </body>

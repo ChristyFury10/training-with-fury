@@ -1,0 +1,10 @@
+<%- include ("./header.ejs") %>
+
+<form action="/user/<%= exercise._id %>?_method=PUT" method="post">
+    <label>Name:<input type="text" name="name" placeholder="Exercise Name" value="<%=exercise.name%>"/></label><br>
+    <label>Description:<input type="text" name="description" placeholder="Enter a description" value="<%=exercise.description%>"></label><br>
+    <label>Tags (separate by comma):<input type="text" name="tags" placeholder="tags" value="<%=exercise.tags%>"></label><br>
+    <label>Image:<input type="text" name="img" placeholder="image url" value="<%=exercise.img%>"></label>
+    <input type="submit" value="Update">
+
+</form>
