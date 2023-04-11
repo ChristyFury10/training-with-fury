@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const authRouter = require("./auth")
 const seedExercises = require("../db/seed.js");
-const Exercise = require("../models/exercise.js");
+const {Exercise, Workout, WERel} = require("../models/exercise.js");
 const UserExercise = require("../models/userExercise.js");
 const userRouter = require("./userCreated")
 

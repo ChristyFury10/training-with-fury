@@ -71,9 +71,18 @@ const premadeExercises = [
         tags: ["back", "shoulders", "upper-body", "arms"],
         img: "https://cdn.shopify.com/s/files/1/1497/9682/articles/MicrosoftTeams-image_2_90411cba-7995-4fac-8f20-af7caa6406a0_750x.jpg?v=1652281904"
     }
+];
+
+const workouts = [
+    {
+        name: "Boulder Shoulders"
+    },
+    {
+        name: "Quad-Mania"
+    }
 ]
 
-module.exports = premadeExercises;
+module.exports = {premadeExercises, workouts};
 
 // name: "", 
 // description: "",
