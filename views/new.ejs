@@ -1,13 +1,26 @@
 <%- include ("./header.ejs") %>
 
 <main>
-    <form action="/user/add-new" method="post">
-        <label>Name:<input type="text" name="name" placeholder="Exercise Name" /></label><br>
-        <label>Description:<input type="text" name="description" placeholder="Enter a description"></label><br>
-        <label>Tags (separate by comma):<input type="text" name="tags" placeholder="tags"></label><br>
-        <label>Image URL:<input type="text" name="img" placeholder="Leave blank if none"></label>
-        <br>
-        <input type="submit" value="Add to User List">
 
-    </form>
+    <div class="input-group mb-3">
+        <form action="/user/add-new" method="post">
+            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="name" placeholder="Exercise Name">
+
+            <span class="input-group-text" id="inputGroup-sizing-default">Tags (separate by comma)</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="tags" placeholder="tags">
+
+            <br>
+            <span class="input-group-text" id="inputGroup-sizing-default">Image URL</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="img" placeholder="Leave blank if none">
+
+            <br>
+            <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="description" placeholder="Enter a description">
+
+            <br>
+            <input type="submit" value="Add to User List">
+        </form>
+    </div>
+
 </main>
