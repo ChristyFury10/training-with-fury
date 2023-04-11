@@ -1,48 +1,48 @@
 const premadeExercises = [
     {
-        name: "bicep curl", 
-        description: "lebow flexion",
+        name: "Bicep Curl", 
+        description: "Elbow flexion",
         tags: ["arms", "biceps"],
         img: "https://media4.giphy.com/media/t6cV5EFu66TqE/giphy.gif?cid=ecf05e47dmg1x27tei5y5gvqvl8ywuar58zbot2e1i9xnd28&rid=giphy.gif&ct=g"
     },
     {
-        name: "leg extension", 
+        name: "Leg Extension", 
         description: "kick leg straight",
         tags: ["quads", "quad", "legs", "lower-body"],
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/LegExtensionMachineExercise.JPG/300px-LegExtensionMachineExercise.JPG"
     },
     {
-        name: "crunch", 
+        name: "Crunch", 
         description: "classic crunch",
         tags: ["core", "abs"],
         img: "https://www.stylist.co.uk/images/app/uploads/2020/03/16110124/gettyimages-498282756-1120x1120.jpg?auto=format%2Ccompress&fit=max&fm=webp&monochrome=38000000&q=75&w=1400"
     },
     {
-        name: "calf riase", 
+        name: "Calf Riase", 
         description: "lift heels",
         tags: ["ankles", "calves", "lower-body"],
         img: "https://bod-blog-assets.prod.cd.beachbodyondemand.com/bod-blog/wp-content/uploads/2022/05/20105758/how-to-slim-calves-calf-raise.jpeg"
     },
     {
-        name: "tricep extension ", 
+        name: "Tricep Extension ", 
         description: " extend elbow",
         tags: ["arms", "triceps", "upper-body"],
         img: "https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80"
     },
     {
-        name: "sled push", 
+        name: "Sled Push", 
         description: "load up some weight and push",
         tags: ["legs", "glutes", "sled"],
         img: "https://post.healthline.com/wp-content/uploads/2020/12/Female_Sled_Push_732x549-thumbnail-1.jpg"
     },
     {
-        name: "oherhead press ", 
+        name: "Overhead Press ", 
         description: "press overhead",
         tags: ["arms", "shoulders","deltoids", "upper-body"],
         img: "https://gethealthyu.com/wp-content/uploads/2014/07/Shoulder-Overhead-Press_Exercise.jpg"
     },
     {
-        name: "lateral raise", 
+        name: "Lateral Raise", 
         description: "arms bent, rasie up",
         tags: ["arms", "deltoids", "shoulders", "upper-body"],
         img: "https://gethealthyu.com/wp-content/uploads/2014/10/Lateral-Raise_Exercise.jpg.webp"
