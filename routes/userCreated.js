@@ -17,10 +17,16 @@ router.get("/created", async (req, res)=>{
     res.render("userCreated.ejs", {userExercises})
 })
 
+
+
+router.delete("/:id", async (req, res)=>{
+    const exercise = await UserExercise.findByIdAndDelete(req.params.id);
+    res.redirect("./created");
+})
+
 router.get("/:id", async (req, res)=>{
     const id = req.params.id;
     const exercise = await UserExercise.findById(req.params.id)
     res.render("showEditable.ejs", {exercise, id})
 })
-
 module.exports = router;
