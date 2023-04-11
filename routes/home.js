@@ -14,10 +14,6 @@ router.get("/", (req, res)=>{
     res.render("home")
 });
 
-router.get("/dashboard", async (req, res)=>{
-    res.render("dashboard")
-});
-
 router.get("/premade", async (req, res)=>{
     const exercises = await Exercise.find({});
     res.render("premade_index", {exercises})
@@ -52,6 +48,14 @@ router.get("/core", async (req, res)=>{
     res.render("core.ejs", {coreExercises})
 });
 
+router.get("/today", (req, res)=>{
+    res.render("today.ejs")
+})
 
+router.get("/:id", async (req, res)=>{
+    const id = req.params.id;
+    const exercise = await Exercise.findById(req.params.id)
+    res.render("showOnly.ejs", {exercise, id})
+})
 
 module.exports = router;

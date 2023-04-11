@@ -3,12 +3,9 @@
     <% for (exercise of exercises){ %>
 
         <h2>
-            <%= exercise.name %>
+            <a href="<%= exercise._id %>"><%= exercise.name %></a>
         </h2>
 
         <%}%>
-        <a href="/arms"><button>Upper Body</button></a>
-        <a href = "/legs"><button>Lower Body</button></a>
-        <a href = "/core"><button>Core</button></a>
 </body>
 </html>

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const UserExercise = require("../models/userExercise.js");
+const seedExercises = require("../db/seed.js");
 
 //***Check auth? middlware */
 
@@ -16,6 +17,12 @@ router.get("/created", async (req, res)=>{
     const userExercises = await UserExercise.find({});
     res.render("userCreated.ejs", {userExercises})
 })
+
+router.get('/seed', async (req, res) => {
+	await UserExercise.deleteMany({});
+	await UserExercise.create(seedExercises);
+	res.redirect("./created");
+});
 
 router.get("/:id/edit", async (req, res)=>{
     const exercise = await UserExercise.findById(req.params.id)
@@ -38,4 +45,6 @@ router.get("/:id", async (req, res)=>{
     const exercise = await UserExercise.findById(req.params.id)
     res.render("showEditable.ejs", {exercise, id})
 })
+
+
 module.exports = router;
