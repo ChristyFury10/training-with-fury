@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-// const authRouter = require("./auth");
 const {seedExercises, Workouts} = require("../db/seed.js");
 const Exercise = require("../models/exercise.js");
-// const userRouter = require("./userCreated")
 const log = (string)=> console.log(string)
 
 //middleware
@@ -26,17 +24,16 @@ router.get('/seed', async (req, res) => {
 	res.redirect('/exercises');
 });
 
+router.get("/today", (req, res)=>{
+    res.render("today.ejs")
+})
+
 // NEW ----------------------------->
 router.get("/add-new", async (req, res)=>{
     res.render("new.ejs")
 });
 
-//SHOW   ----------------->
-router.get("/:id", async (req, res)=>{
-    const id = req.params.id;
-    const exercise = await Exercise.findById(req.params.id)
-    res.render("show.ejs", {exercise, id})
-})
+
 
 //CREATE - AUTHENTICATION  -------------------> NOT READY
 router.post("/add-new", async (req, res)=>{
@@ -48,15 +45,18 @@ router.post("/add-new", async (req, res)=>{
 //EDIT - AUTHENTICATION  -------------------> NOT READY
 
 router.get("/:id/edit", async (req, res)=>{
-    console.log("------------");
-    console.log(req);
-    console.log("------------");
+    // console.log("------------");
+    // console.log(req);
+    // console.log("------------");
     const exercise = await Exercise.findById(req.params.id)
     res.render("edit.ejs", {exercise})
 });
 
 router.put("/:id", async (req, res)=>{
     const id = req.params.id;
+    req.body.tags = req.body.tags.split(",")
+    console.log(req.body.tags) 
+    // if empty set equal to empty string, emty string as default
     const exercise = await Exercise.findByIdAndUpdate(id, {$set: req.body}, {new:true});
     res.redirect("/exercises")
 });
@@ -66,43 +66,31 @@ router.delete("/:id", async (req, res)=>{
     res.redirect("/exercises");
 })
 
-// router.get("/premade", async (req, res)=>{
-//     const exercises = await Exercise.find({});
-//     res.render("premade_index", {exercises})
-// });
+router.get("/arms", async (req, res)=>{
+    const armsExercises= await 
+    Exercise.find( { $or:[ {'tags': "arms"}, {'tags':"upper-body"} ]});
+    res.render("arms.ejs", {armsExercises})
+})
+
+router.get("/legs", async (req, res)=>{
+    const legsExercises= await 
+    Exercise.find( { $or:[ {'tags': "legs"}, {'tags':"lower-body"} ]});
+    res.render("legs.ejs", {legsExercises})
+})
+
+router.get("/core", async (req, res)=>{
+    const coreExercises= await 
+    Exercise.find( { $or:[ {'tags': "core"}, {'tags':"abs"} ]});
+    res.render("core.ejs", {coreExercises})
+});
 
 
-// router.get("/images", async (req, res)=>{
-//     const exercises = await Exercise.find({});
-//     res.render("image_index", {exercises})
-// })
-
-
-
-// router.get("/arms", async (req, res)=>{
-//     const armsExercises= await 
-//     Exercise.find( { $or:[ {'tags': "arms"}, {'tags':"upper-body"} ]});
-//     res.render("arms.ejs", {armsExercises})
-// })
-
-// router.get("/legs", async (req, res)=>{
-//     const legsExercises= await 
-//     Exercise.find( { $or:[ {'tags': "legs"}, {'tags':"lower-body"} ]});
-//     res.render("legs.ejs", {legsExercises})
-// })
-
-// router.get("/core", async (req, res)=>{
-//     const coreExercises= await 
-//     Exercise.find( { $or:[ {'tags': "core"}, {'tags':"abs"} ]});
-//     res.render("core.ejs", {coreExercises})
-// });
-
-// router.get("/today", (req, res)=>{
-//     res.render("today.ejs")
-// })
-
-
-
+//SHOW   ----------------->
+router.get("/:id", async (req, res)=>{
+    const id = req.params.id;
+    const exercise = await Exercise.findById(req.params.id)
+    res.render("show.ejs", {exercise, id})
+})
 
 
 module.exports = router;
