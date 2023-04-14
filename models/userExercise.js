@@ -1,12 +1,12 @@
-const {mongoose} = require("../db/connection");
+// const {mongoose} = require("../db/connection");
 
 const UserExerciseSchema = new mongoose.Schema ({
     name: String, 
     description: String,
-    tags: [],
+    tags: [String],
     img: String,
 })
 
-const UserExercise = mongoose.model("UserExercise", UserExerciseSchema)
+const UserExercise = mongoose.model("UserExercise", UserExerciseSchema, "userexercises")
 
 module.exports = UserExercise;

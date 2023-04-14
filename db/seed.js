@@ -1,6 +1,6 @@
-const premadeExercises = [
+const seedExercises = [
     {
-        name: "Bicep Curl", 
+        name: "bicepcurl", 
         description: "Elbow flexion",
         tags: ["arms", "biceps"],
         img: "https://media4.giphy.com/media/t6cV5EFu66TqE/giphy.gif?cid=ecf05e47dmg1x27tei5y5gvqvl8ywuar58zbot2e1i9xnd28&rid=giphy.gif&ct=g"
@@ -73,7 +73,7 @@ const premadeExercises = [
     }
 ];
 
-const workouts = [
+const Workouts = [
     {
         name: "Boulder Shoulders"
     },
@@ -82,9 +82,5 @@ const workouts = [
     }
 ]
 
-module.exports = {premadeExercises, workouts};
+module.exports = { Workouts, seedExercises};
 
-// name: "", 
-// description: "",
-// tags: ["", "", "", ""],
-// img: String,
