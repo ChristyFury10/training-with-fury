@@ -1,6 +1,6 @@
 // import mongoose
 const mongoose = require("mongoose");
-require("dotenv").config();
+// require("dotenv").config();
 
 //connect mongoose woth mongoDB url
 mongoose.connect(process.env.DATABASE_URL);
