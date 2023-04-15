@@ -27,8 +27,4 @@ app.get("/", (req, res)=>{
 })
 
 
-mongoose.connect(DATABASE_URL).then(
-    ()=>{
-        app.listen(PORT, ()=> console.log(`Connected to mongoDB and express is listening on port ${PORT}`))
-    }
-)
+app.listen(PORT, ()=> console.log(`Connected to mongoDB and express is listening on port ${PORT}`))

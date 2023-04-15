@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { mongoose } = require('../db/connection');
 
 const ExerciseSchema = new mongoose.Schema ({
     name: String, 

@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const UserExercise = require("../remove/userExercise.js");
-const {seedExercises, workouts} = require("../db/seed.js");
-const {Exercise, Workout, WERel} = require("../models/exercise.js");
+const UserExercise = require("../userExercise.js");
+const {seedExercises, workouts} = require("../../db/seed.js");
+const {Exercise, Workout, WERel} = require("../../models/exercise.js");
 
 //***Check auth? middlware */
 
