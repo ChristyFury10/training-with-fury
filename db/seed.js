@@ -70,8 +70,83 @@ const seedExercises = [
         description: "bend at hips, pull weight up next to waist",
         tags: ["back", "shoulders", "upper-body", "arms"],
         img: "https://cdn.shopify.com/s/files/1/1497/9682/articles/MicrosoftTeams-image_2_90411cba-7995-4fac-8f20-af7caa6406a0_750x.jpg?v=1652281904"
+    },
+    {
+        name: "compression drils",
+        description: "seated in a pike, lift legs alternating",
+        tags: "core, abs",
+        img: "",
+    },
+    {
+        name:  "Single Leg RDL",
+        description: "keep weight close to standing leg...",
+        tags: "lower-body, hamstrings, glutes",
+        img: ""
+    },
+    {
+        name: "Tricep Push-Up",
+        description: "hands next to ribs, arms close to body",
+        tags: "upper-body, arms, boulder-shoulders",
+        img: ""
+    },
+    {
+        name: "Reverse Flys",
+        description: "bend forward at HIPS, not back, retract shoulders and pull arms back",
+        tags: "upper-body, boulder-shoulders, arms",
+        img: ""
+    },
+    {
+        name:  "deadlift",
+        description: "", 
+        tags: "",
+        img: ""
+    },
+    {
+        name: "barball back-squat",
+        description: "",
+        tags: "",
+        img: ""
+    },
+    {
+        name: "penguins",
+        description: "", 
+        tags: "",
+        img: ""
+    },
+    {
+        name: "Leg Press",
+        description: "", 
+        tags: "",
+        img: ""
+    },
+    {
+        name: "Barbell Clean",
+        description: "", 
+        tags: "",
+        img: ""
+    },
+    {
+        name: "Walking Lunges",
+        description: "", 
+        tags: "",
+        img: ""
+    },
+    {
+        name: "Barbell Hip Thrust",
+        description: "", 
+        tags: "",
+        img: ""
+    },
+    {
+        
     }
+
 ];
+
+// name: "",
+// description: "", 
+// tags: "",
+// img: ""
 
 const Workouts = [
     {

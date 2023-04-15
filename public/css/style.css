@@ -6,7 +6,8 @@
     width: 100px;
 }
 
-.btn{
+.logo{
+    width: 75px;
 }
 
 @media (max-width: 391px) {
