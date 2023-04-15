@@ -17,9 +17,8 @@ router.get("/", async (req, res)=>{
     const exercises = await Exercise.find({});
     res.render("index.ejs", {exercises})
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -30,9 +29,8 @@ router.get('/seed', async (req, res) => {
 	await Exercise.create(seedExercises);
 	res.redirect('/exercises');
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -45,9 +43,8 @@ router.get("/add-new", async (req, res)=>{
     try{
     res.render("new.ejs")
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -60,9 +57,8 @@ router.post("/add-new", async (req, res)=>{
     const exercise = await Exercise.create(req.body);
     res.redirect("/exercises")
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -76,9 +72,8 @@ router.get("/:id/edit", async (req, res)=>{
     const exercise = await Exercise.findById(req.params.id)
     res.render("edit.ejs", {exercise})
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -91,9 +86,8 @@ router.put("/:id", async (req, res)=>{
     const exercise = await Exercise.findByIdAndUpdate(id, {$set: req.body}, {new:true});
     res.redirect("/exercises")
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -102,9 +96,8 @@ router.delete("/:id", async (req, res)=>{
     const exercise = await Exercise.findByIdAndDelete(req.params.id);
     res.redirect("/exercises");
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -126,9 +119,8 @@ router.get("/legs", async (req, res)=>{
     Exercise.find( { $or:[ {'tags': "legs"}, {'tags':"lower-body"} ]});
     res.render("legs.ejs", {legsExercises})
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 })
 
@@ -138,9 +130,8 @@ router.get("/core", async (req, res)=>{
     Exercise.find( { $or:[ {'tags': "core"}, {'tags':"abs"} ]});
     res.render("core.ejs", {coreExercises})
     }
-    catch(err){
-    //     console.log(err);
-    //     next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
@@ -152,9 +143,8 @@ router.get("/:id", async (req, res)=>{
     const exercise = await Exercise.findById(req.params.id)
     res.render("show.ejs", {exercise, id})
     }
-    catch(err){
-        // console.log(err);
-        // next();
+    catch (error) {
+        console.log('error', error)
     }
 });
 
