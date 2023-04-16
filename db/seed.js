@@ -8,7 +8,7 @@ const seedExercises = [
     {
         name: "Leg Extension", 
         description: "kick leg straight",
-        tags: ["quads", "quad", "legs", "lower-body"],
+        tags: ["quads", "quad", "legs", "lower-body", "quad-mania"],
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/LegExtensionMachineExercise.JPG/300px-LegExtensionMachineExercise.JPG"
     },
     {
@@ -56,7 +56,7 @@ const seedExercises = [
     { 
         name: "Split Squat", 
         description: "rear leg up on an elevates surface, other does the work",
-        tags: ["legs", "quads", "glutes", "lower-body"],
+        tags: ["legs", "quads", "glutes", "lower-body", "quad-mania"],
         img: "https://image.boxrox.com/2021/09/bulgarian-split-squat-how-to.png"
     }, 
     {
@@ -80,43 +80,43 @@ const seedExercises = [
     {
         name:  "Single Leg RDL",
         description: "keep weight close to standing leg...",
-        tags: "lower-body, hamstrings, glutes",
+        tags: ["lower-body, hamstrings, glutes"],
         img: ""
     },
     {
         name: "Tricep Push-Up",
         description: "hands next to ribs, arms close to body",
-        tags: "upper-body, arms, boulder-shoulders",
+        tags: ["upper-body, arms, boulder-shoulders"],
         img: ""
     },
     {
         name: "Reverse Flys",
         description: "bend forward at HIPS, not back, retract shoulders and pull arms back",
-        tags: "upper-body, boulder-shoulders, arms",
+        tags: ["upper-body, boulder-shoulders, arms"],
         img: ""
     },
     {
         name:  "deadlift",
-        description: "", 
-        tags: "",
+        description: "Barbell, dumbbells, or kettlebell", 
+        tags: ["lower-body, hamstrings, glutes"],
         img: ""
     },
     {
-        name: "barball back-squat",
+        name: "barbell back-squat",
         description: "",
-        tags: "",
+        tags: ["lower-body", "quads", "glutes", "quad-mania"],
         img: ""
     },
     {
         name: "penguins",
         description: "", 
-        tags: "",
+        tags: ["core, abs"],
         img: ""
     },
     {
         name: "Leg Press",
         description: "", 
-        tags: "",
+        tags: ["lower-body", "quads", "glutes", "quad-mania"],
         img: ""
     },
     {
@@ -128,7 +128,7 @@ const seedExercises = [
     {
         name: "Walking Lunges",
         description: "", 
-        tags: "",
+        tags: "quad-mania",
         img: ""
     },
     {
@@ -138,7 +138,7 @@ const seedExercises = [
         img: ""
     },
     {
-        
+
     }
 
 ];

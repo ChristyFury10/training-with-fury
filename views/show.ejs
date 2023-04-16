@@ -1,17 +1,27 @@
 <%- include ("header.ejs") %>
-<h3>
-<%= exercise.name%> 
-<br>
-<%=exercise.description%> 
-<br>
-<%=exercise.tags %>
-</h3>
-<a href="/exercises/<%= exercise._id %>/edit"><button>Edit this exercise</button></a>
-<form action="/exercises/<%= exercise._id %>?_method=DELETE" method="POST">
-<input type="submit" value="Delete"/>
-  </form>
-<img src="<%=exercise.img%>" >
 
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="true" href="#">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= exercise.name%></h5>
+    <p class="card-text"><%=exercise.description%></p>
+    <img class = "show-img" src="<%=exercise.img%>" >
+    <br>
+    <a href="/exercises/<%= exercise._id %>/edit"><button class="btn">Edit this exercise</button></a>
+    <form action="/exercises/<%= exercise._id %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete" class="btn"/>
+    </form>
+  </div>
+</div>
 
 </body>
 </html>
