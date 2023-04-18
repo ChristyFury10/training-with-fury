@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const authRouter = require("../routers/authRouter.js");
 // const mongoose = require("mongoose");
 const {seedExercises, Workouts} = require("../db/seed.js");
 const Exercise = require("../models/exercise.js");
 const log = (string)=> console.log(string)
 
+
 //middleware
-// router.use("/auth", authRouter);//
+router.use("/auth", authRouter);
 // router.use("/user", userRouter);
 
 //==============ROUTES============================
@@ -15,7 +17,12 @@ const log = (string)=> console.log(string)
 router.get("/", async (req, res)=>{
     try{
     const exercises = await Exercise.find({});
-    res.render("index.ejs", {exercises})
+    let user;
+    if (req.session.currentUser){
+        user = req.session.currentUser;
+        console.log(user)
+    }
+    res.render("index.ejs", {exercises, user})
     }
     catch (error) {
         console.log('error', error)
@@ -34,14 +41,29 @@ router.get('/seed', async (req, res) => {
     }
 });
 
+router.get("/usercreated", async (req, res)=>{
+    res.send("user created page here")
+})
+
 router.get("/today", (req, res)=>{
-    res.render("today.ejs")
+    let user;
+    if (req.session.currentUser){
+        user = req.session.currentUser;
+        console.log(user)
+    }
+    res.render("today.ejs", {user})
 })
 
 // NEW ----------------------------->
 router.get("/add-new", async (req, res)=>{
     try{
-    res.render("new.ejs")
+        let user;
+    if (req.session.currentUser){
+        user = req.session.currentUser;
+        console.log(user);
+        
+    }
+    res.render("new.ejs", {user})
     }
     catch (error) {
         console.log('error', error)
@@ -53,8 +75,14 @@ router.get("/add-new", async (req, res)=>{
 //CREATE - AUTHENTICATION  -------------------> NOT READY
 router.post("/add-new", async (req, res)=>{
     try{
-    log(req.body);
+        if (req.session.currentUser){
+            user = req.session.currentUser;
+            console.log(user)
+        }
+    // log(req.body);
     const exercise = await Exercise.create(req.body);
+    exercise.user = user.id;
+    // console.log("user", exercise.user)
     res.redirect("/exercises")
     }
     catch (error) {
@@ -139,9 +167,13 @@ router.get("/core", async (req, res)=>{
 //SHOW   ----------------->
 router.get("/:id", async (req, res)=>{
     try{
+        if (req.session.currentUser){
+            user = req.session.currentUser;
+            console.log(user)
+        }
     const id = req.params.id;
     const exercise = await Exercise.findById(req.params.id)
-    res.render("show.ejs", {exercise, id})
+    res.render("show.ejs", {exercise, id, user})
     }
     catch (error) {
         console.log('error', error)
