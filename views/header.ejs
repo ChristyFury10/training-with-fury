@@ -26,7 +26,7 @@
             <a class="nav-link" href="/exercises/today">Today's Workout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/exercises">User Generated Exercises</a>
+            <a class="nav-link" href="/exercises/usercreated">User Generated Exercises</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,16 +47,16 @@
               <li><a class="dropdown-item" href="/workouts/quadmania">Quad-Mania</a></li>
             </ul>
           </li>
-          <% if(!loggedIn) {%>
+            <li class="nav-item">
           <div id="login">
+            <% if(!loggedIn) {%>
             <a href = "/exercises/auth/login"><button class="btn btn-primary btn-sm">Login</button></a>
             <a href = "/exercises/auth/signup"><button class="btn btn-primary btn-sm">Sign-up</button></a>
-          </div>
-          <%}%>
+            <%}%>
+            <a href = "/exercises/auth/logout"><button class="btn btn-primary btn-sm">Logout</button></a>
+        </div>
+        </li>
         </ul>
-      </div>
-      <div>
-        <a href = "/exercises/auth/logout"><button class="btn btn-primary btn-sm">Logout</button></a>
       </div>
     </div>
   </nav>

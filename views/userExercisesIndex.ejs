@@ -1,3 +1,11 @@
-<%= user.username %>
+<%- include ("header.ejs") %>
 
+<% if(loggedIn){%>
+<%= user.username %>
 <%= userExercises %>
+<%}%>
+
+
+
+</body>
+</html>

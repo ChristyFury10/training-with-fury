@@ -52,7 +52,18 @@ router.get("/", async (req, res)=>{
 
 router.get("/usercreated", async (req, res)=>{
     let loggedIn = false;
-    res.send("user created page here")
+    let user;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+        console.log(user);
+        // exercises = 
+         res.render("userExercisesIndex.ejs", {user, loggedIn})
+    }
+    else{
+        res.render("userExercisesIndex.ejs", {loggedIn})
+    }
+    
 })
 
 router.get("/today", (req, res)=>{

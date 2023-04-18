@@ -1,7 +1,8 @@
 <%- include ("./header.ejs") %>
     <h2>Current exercises in this library:</h2>
-    <a href="/exercises/add-new" ><button>+</button></a>
-    
+    <%if(loggedIn){%>
+    <a href="/exercises/add-new" ><button class="btn btn-primary btn-sm">+</button></a>
+      <%}%>
     <div id = "cards" class="row row-cols-2 row-cols-md-4 g-4 ">
 
          <% for (exercise of exercises){ %>
