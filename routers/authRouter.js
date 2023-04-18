@@ -30,6 +30,9 @@ router.post("/signup", async (req, res)=>{
 
 // login route (/auth/login)
 router.get("/login", (req, res)=>{
+    if(req.session.currentUser){
+    console.log(req.session.currentUser)
+    }
     res.render("auth/login")
 });
 
@@ -49,8 +52,8 @@ router.post("/login", async (req, res)=>{
                 id: user._id
             };
             console.log("matched");
-            console.log("username:", req.session.user.username)
-            res.redirect("/exercises", {user})
+            console.log("username:", req.session.currentUser.username)
+            res.redirect("/exercises")
             
         }
         else{res.status(400).json({error: "password does not match"})}
@@ -65,11 +68,12 @@ router.post("/login", async (req, res)=>{
 
 });
 
-// router.get("/logout", (req, res)=>{
-//     req.session.user = null;
-//     res.redirect("/login")
-// });
-
+router.get('/logout', (req, res) => {
+    req.session.destroy(function(err) {
+        res.redirect('/exercises/auth/login');
+      })
+    
+})
 
 
 module.exports = router;

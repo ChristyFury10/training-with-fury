@@ -4,7 +4,8 @@ const authRouter = require("../routers/authRouter.js");
 // const mongoose = require("mongoose");
 const {seedExercises, Workouts} = require("../db/seed.js");
 const Exercise = require("../models/exercise.js");
-const log = (string)=> console.log(string)
+const log = (string)=> console.log(string);
+let user = null;
 
 
 //middleware
@@ -17,29 +18,36 @@ router.use("/auth", authRouter);
 router.get("/", async (req, res)=>{
     try{
     const exercises = await Exercise.find({});
-    let user;
     if (req.session.currentUser){
+        let user;
         user = req.session.currentUser;
+        // console.log(user)
+        res.render("index.ejs", {exercises, user});
         console.log(user)
     }
-    res.render("index.ejs", {exercises, user})
+    else{
+        res.render("index.ejs", {exercises});
+        console.log(user)
     }
+    
+    }
+    
     catch (error) {
         console.log('error', error)
     }
 });
 
 // seed
-router.get('/seed', async (req, res) => {
-    try{
-	await Exercise.deleteMany({});
-	await Exercise.create(seedExercises);
-	res.redirect('/exercises');
-    }
-    catch (error) {
-        console.log('error', error)
-    }
-});
+// router.get('/seed', async (req, res) => {
+//     try{
+// 	await Exercise.deleteMany({});
+// 	await Exercise.create(seedExercises);
+// 	res.redirect('/exercises');
+//     }
+//     catch (error) {
+//         console.log('error', error)
+//     }
+// });
 
 router.get("/usercreated", async (req, res)=>{
     res.send("user created page here")
@@ -49,9 +57,13 @@ router.get("/today", (req, res)=>{
     let user;
     if (req.session.currentUser){
         user = req.session.currentUser;
-        console.log(user)
+        console.log(user);
+         res.render("today.ejs", {user})
     }
-    res.render("today.ejs", {user})
+    else{
+        res.render("today.ejs")
+    }
+   
 })
 
 // NEW ----------------------------->
@@ -61,9 +73,12 @@ router.get("/add-new", async (req, res)=>{
     if (req.session.currentUser){
         user = req.session.currentUser;
         console.log(user);
-        
+        res.render("new.ejs", {user})
     }
-    res.render("new.ejs", {user})
+    else{
+        res.send("must be logged in to add an exercise")
+    }
+    
     }
     catch (error) {
         console.log('error', error)
@@ -94,9 +109,6 @@ router.post("/add-new", async (req, res)=>{
 
 router.get("/:id/edit", async (req, res)=>{
     try{
-    // console.log("------------");
-    // console.log(req);
-    // console.log("------------");
     const exercise = await Exercise.findById(req.params.id)
     res.render("edit.ejs", {exercise})
     }
@@ -133,7 +145,14 @@ router.get("/arms", async (req, res)=>{
     try{
     const armsExercises= await 
     Exercise.find( { $or:[ {'tags': "arms"}, {'tags':"upper-body"} ]});
-    res.render("arms.ejs", {armsExercises})
+    if (req.session.currentUser){
+        let user;
+        user = req.session.currentUser;
+        res.render("arms.ejs", {armsExercises, user})
+    }
+    else {
+        res.render("arms.ejs", {armsExercises})
+    }
     }
     catch(err){
         // console.log(err);
@@ -145,7 +164,14 @@ router.get("/legs", async (req, res)=>{
     try{
     const legsExercises= await 
     Exercise.find( { $or:[ {'tags': "legs"}, {'tags':"lower-body"} ]});
-    res.render("legs.ejs", {legsExercises})
+    if (req.session.currentUser){
+        let user;
+        user = req.session.currentUser;
+        res.render("legs.ejs", {legsExercises, user})
+    }
+    else {
+        res.render("legs.ejs", {legsExercises})
+    }
     }
     catch (error) {
         console.log('error', error)
@@ -156,7 +182,14 @@ router.get("/core", async (req, res)=>{
     try{
     const coreExercises= await 
     Exercise.find( { $or:[ {'tags': "core"}, {'tags':"abs"} ]});
-    res.render("core.ejs", {coreExercises})
+    if (req.session.currentUser){
+        let user;
+        user = req.session.currentUser;
+        res.render("core.ejs", {coreExercises, user})
+    }
+    else {
+        res.render("core.ejs", {coreExercises})
+    }
     }
     catch (error) {
         console.log('error', error)
@@ -166,14 +199,17 @@ router.get("/core", async (req, res)=>{
 
 //SHOW   ----------------->
 router.get("/:id", async (req, res)=>{
+    const id = req.params.id;
+    const exercise = await Exercise.findById(req.params.id)
     try{
         if (req.session.currentUser){
             user = req.session.currentUser;
-            console.log(user)
+            console.log(user);
+            res.render("show.ejs", {exercise, id, user})
         }
-    const id = req.params.id;
-    const exercise = await Exercise.findById(req.params.id)
-    res.render("show.ejs", {exercise, id, user})
+        else{
+            res.render("show.ejs", {exercise, id})
+        }
     }
     catch (error) {
         console.log('error', error)
