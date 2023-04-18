@@ -5,7 +5,8 @@ const bcrypt = require("bcryptjs")
 
 // signup route {(/auth/signup)}
 router.get("/signup", (req, res)=>{
-    res.render("auth/signup")
+    let loggedIn = false;
+    res.render("auth/signup", {loggedIn})
 });
 
 // post route to create the user from the signup page
@@ -30,10 +31,12 @@ router.post("/signup", async (req, res)=>{
 
 // login route (/auth/login)
 router.get("/login", (req, res)=>{
+    let loggedIn = false;
     if(req.session.currentUser){
+        let loggedIn = true;
     console.log(req.session.currentUser)
     }
-    res.render("auth/login")
+    res.render("auth/login", {loggedIn})
 });
 
 

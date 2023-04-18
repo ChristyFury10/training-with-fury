@@ -1,3 +1,6 @@
+<% if(loggedIn) {%>
+<% console.log(user)%>
+<%}%>
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
   <head>
@@ -44,10 +47,12 @@
               <li><a class="dropdown-item" href="/workouts/quadmania">Quad-Mania</a></li>
             </ul>
           </li>
+          <% if(!loggedIn) {%>
           <div id="login">
             <a href = "/exercises/auth/login"><button class="btn btn-primary btn-sm">Login</button></a>
             <a href = "/exercises/auth/signup"><button class="btn btn-primary btn-sm">Sign-up</button></a>
           </div>
+          <%}%>
         </ul>
       </div>
       <div>
