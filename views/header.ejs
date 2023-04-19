@@ -25,9 +25,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/exercises/today">Today's Workout</a>
           </li>
+          <% if(loggedIn){%>
           <li class="nav-item">
             <a class="nav-link" href="/exercises/usercreated">User Generated Exercises</a>
           </li>
+          <%}%>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Exercise by Category
@@ -56,7 +58,13 @@
             <a href = "/exercises/auth/logout"><button class="btn btn-primary btn-sm">Logout</button></a>
         </div>
         </li>
+        <li class="nav-item nav-link disabled">
+         
+        </li>
         </ul>
       </div>
+    </div>
+    <div id="nav-username">
+      <%= user.username %>
     </div>
   </nav>

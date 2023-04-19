@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authRouter = require("../routers/authRouter.js");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const {seedExercises, Workouts} = require("../db/seed.js");
 const Exercise = require("../models/exercise.js");
 const log = (string)=> console.log(string);
@@ -56,9 +56,10 @@ router.get("/usercreated", async (req, res)=>{
     if (req.session.currentUser){
         loggedIn = true;
         user = req.session.currentUser;
-        console.log(user);
-        // exercises = 
-         res.render("userExercisesIndex.ejs", {user, loggedIn})
+        // console.log(user);
+        exercises = await Exercise.find({"user": req.session.currentUser.id.toString()})
+        // console.log(exercises);
+         res.render("userExercisesIndex.ejs", {user, loggedIn, exercises})
     }
     else{
         res.render("userExercisesIndex.ejs", {loggedIn})
@@ -130,7 +131,14 @@ router.get("/:id/edit", async (req, res)=>{
     try{
         
     const exercise = await Exercise.findById(req.params.id)
-    res.render("edit.ejs", {exercise})
+    let loggedIn = false;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+        console.log(user)
+        res.render("edit.ejs", {exercise, loggedIn, user})
+    }
+    
     }
     catch (error) {
         console.log('error', error)
@@ -154,7 +162,15 @@ router.put("/:id", async (req, res)=>{
 router.delete("/:id", async (req, res)=>{
     try{
     const exercise = await Exercise.findByIdAndDelete(req.params.id);
-    res.redirect("/exercises");
+    let user;
+    let loggedIn;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+        console.log(user)
+        res.redirect("/exercises");
+    }
+   
     }
     catch (error) {
         console.log('error', error)

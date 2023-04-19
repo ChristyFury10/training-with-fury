@@ -8,8 +8,17 @@ const log = (string)=> console.log(string)
 router.get("/quadmania", async (req, res)=>{
     try{
     let workout = await Exercise.find( {'tags':"quad-mania"});
-    res.render("workouts/quadmania.ejs", {workout})
-
+    let loggedIn = false;
+    
+    if (req.session.currentUser){
+        let user;
+        loggedIn = true;
+        user = req.session.currentUser;
+        res.render("workouts/quadmania.ejs", {workout, loggedIn, user})
+    }
+    else{
+        res.render("workouts/quadmania.ejs", {workout, loggedIn})
+    }
     }
     catch{
 

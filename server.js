@@ -40,7 +40,12 @@ app.use("/workouts", workoutsRouter);
 // app.use("/users", usersRouter);
 
 app.get("/", (req, res)=>{
-    res.render("home.ejs")
+    let loggedIn;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+    }
+    res.render("home.ejs", {loggedIn, user})
 })
 
 
