@@ -64,7 +64,9 @@
         </ul>
       </div>
     </div>
+    <% if(loggedIn) {%>
     <div id="nav-username">
       <%= user.username %>
     </div>
+    <%}%>
   </nav>
