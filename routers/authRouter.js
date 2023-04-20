@@ -11,7 +11,15 @@ router.get("/signup", (req, res)=>{
 
 // post route to create the user from the signup page
 router.post("/signup", async (req, res)=>{
+    // if(username exists... username exisrs... retry)
     try{
+        let userExists = await User.exists({username: req.body.username});
+        if (userExists){
+           console.log(userExists);
+           // redireddt to login again with added message
+           return;
+        }
+        else{
         // encrypt password
         const salt = await bcrypt.genSalt(10);
         req.body.password = await bcrypt.hash(req.body.password, salt);
@@ -20,9 +28,10 @@ router.post("/signup", async (req, res)=>{
         console.log(req.body)
         // redirect to login page
         res.redirect("/exercises/auth/login")
+        }
     }
     catch(error){
-        res.status(400).json(error)
+        res.status(400).json("could not sign up");
     }
    
 

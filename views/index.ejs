@@ -11,7 +11,9 @@
             
             <div class="card-body">
               <h5 class="card-title"><%= exercise.name%></h5>
+              <a href="/exercises/<%=exercise.id%>">
               <img src="<%=exercise.img%>" class="card-img-top" alt="...">
+              </a>
               <p class="card-text"><%=exercise.description%></p>
             </div>
             <a href="/exercises/<%=exercise.id%>" class="btn btn-primary">View Details</a>
