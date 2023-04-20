@@ -17,18 +17,19 @@ router.use("/auth", authRouter);
 //INDEX --------------------->
 router.get("/", async (req, res)=>{
     try{
-        let loggedIn = false;
+    let loggedIn = false;
+    let user;
     const exercises = await Exercise.find({});
     if (req.session.currentUser){
         loggedIn = true;
-        let user;
+        
         user = req.session.currentUser;
         // console.log(user)
         res.render("index.ejs", {exercises, user, loggedIn});
         console.log(user)
     }
     else{
-        res.render("index.ejs", {exercises, loggedIn});
+        res.render("index.ejs", {exercises, loggedIn, user});
     }
     
     }
@@ -162,9 +163,9 @@ router.put("/:id", async (req, res)=>{
 router.delete("/:id", async (req, res)=>{
     try{
     const exercise = await Exercise.findByIdAndDelete(req.params.id);
-    let user;
     let loggedIn;
     if (req.session.currentUser){
+        let user;
         loggedIn = true;
         user = req.session.currentUser;
         console.log(user)
@@ -243,17 +244,19 @@ router.get("/core", async (req, res)=>{
 router.get("/:id", async (req, res)=>{
     const id = req.params.id;
     let loggedIn = false;
+    let usersExercise = false;
     const exercise = await Exercise.findById(req.params.id)
     try{
         if (req.session.currentUser){
             loggedIn = true;
             user = req.session.currentUser;
-            console.log(user);
-            res.render("show.ejs", {exercise, id, user, loggedIn})
+            if(exercise.user){
+            if(exercise.user.id === user.id.toString()){
+                usersExercise = true;
+            }
         }
-        else{
-            res.render("show.ejs", {exercise, id, loggedIn})
         }
+        res.render("show.ejs", {exercise, id, user, loggedIn, usersExercise})
     }
     catch (error) {
         console.log('error', error)

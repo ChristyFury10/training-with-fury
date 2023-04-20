@@ -41,6 +41,7 @@ app.use("/workouts", workoutsRouter);
 
 app.get("/", (req, res)=>{
     let loggedIn;
+    let user;
     if (req.session.currentUser){
         loggedIn = true;
         user = req.session.currentUser;
