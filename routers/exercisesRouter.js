@@ -121,15 +121,15 @@ router.post("/add-new", async (req, res)=>{
     // log(req.body);
     const exercise = await Exercise.create(req.body);
     exercise.user = user.id;
-    let validURL;
-    console.log(req.body.img)
-    urlExists(req.body.img.toString(), function(err, exists) {
-        console.log(exists);
-    //     if (!exists){
-    //     console.log("invalid url");
-    //     exercise.img = defaultImgURL.toString();
-    // }
-    });
+    // let validURL;
+    // console.log(req.body.img)
+    // urlExists(req.body.img.toString(), function(err, exists) {
+    //     console.log(exists);
+    // //     if (!exists){
+    // //     console.log("invalid url");
+    // //     exercise.img = defaultImgURL.toString();
+    
+    // });
     
     
     // console.log("user", exercise.user)

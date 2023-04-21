@@ -35,6 +35,8 @@ Individual Exercise: <img src = "https://i.imgur.com/bGUhSUb.jpg.jpg">
 - body part selector
 
 
+
+
 Schemas:
 const premadeExerciseSchema = new Schema ({
     name: String, 
@@ -55,3 +57,4 @@ const premadeWorkoutSchema = new Schema ({
     user: {type: Schema.Types.ObjectId, ref: "User"}
 });
 
+<img src="https://imgur.com/a/NILOERv">
