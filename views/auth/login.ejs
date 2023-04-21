@@ -1,5 +1,8 @@
 <%- include ("../header.ejs") %>
 <body>
+  <% if(incorrectInfo) {%>
+    <h3>Invalid Information</h3>
+    <%}%>
 <h2>Login:</h2>
     <form action="./login" method="post">
     <div class="input-group input-group-sm mb-3">

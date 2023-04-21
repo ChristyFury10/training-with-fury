@@ -6,18 +6,22 @@ const bcrypt = require("bcryptjs")
 // signup route {(/auth/signup)}
 router.get("/signup", (req, res)=>{
     let loggedIn = false;
-    res.render("auth/signup", {loggedIn})
+    let takenUsername;
+    res.render("auth/signup", {loggedIn, takenUsername})
 });
 
 // post route to create the user from the signup page
 router.post("/signup", async (req, res)=>{
     // if(username exists... username exisrs... retry)
     try{
+        
+        let takenUsername;
         let userExists = await User.exists({username: req.body.username});
         if (userExists){
+            let loggedIn;
+            takenUsername = true;
            console.log(userExists);
-           // redireddt to login again with added message
-           return;
+           res.render("auth/signup", {takenUsername, loggedIn})
         }
         else{
         // encrypt password
@@ -41,11 +45,12 @@ router.post("/signup", async (req, res)=>{
 // login route (/auth/login)
 router.get("/login", (req, res)=>{
     let loggedIn = false;
+    let incorrectInfo;
     if(req.session.currentUser){
         let loggedIn = true;
     console.log(req.session.currentUser)
     }
-    res.render("auth/login", {loggedIn})
+    res.render("auth/login", {loggedIn, incorrectInfo})
 });
 
 
@@ -55,6 +60,7 @@ router.post("/login", async (req, res)=>{
     // check if user exists already
     const user = await User.findOne({username: req.body.username});
     console.log(user)
+    let incorrectInfo;
     if (user){
         const result = await bcrypt.compare(req.body.password, user.password);
         console.log(result)
@@ -68,14 +74,21 @@ router.post("/login", async (req, res)=>{
             res.redirect("/exercises")
             
         }
-        else{res.status(400).json({error: "password does not match"})}
+        // else{res.status(400).json({error: "password does not match"})}
     }
+    // else{
+    //     res.status(400).json({error: "user does not exist"})
+    // }
     else{
-        res.status(400).json({error: "user does not exist"})
+        let loggedIn;
+        let incorrectInfo = true;
+        res.render("auth/login", {incorrectInfo, loggedIn})
     }
     }
     catch(error){
-        res.status(400).json({error: "unable to log in"})
+        
+        res.status(400).json({error: "unable to log in"});
+      
     }
 
 });
