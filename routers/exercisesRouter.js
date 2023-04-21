@@ -6,6 +6,9 @@ const {seedExercises, Workouts} = require("../db/seed.js");
 const Exercise = require("../models/exercise.js");
 const log = (string)=> console.log(string);
 let user = null;
+var urlExists = require("url-exists")
+
+const defaultImgURL = "https://cdn.pixabay.com/photo/2017/01/31/08/48/barbell-2023339__340.png"
 
 
 //middleware
@@ -118,6 +121,17 @@ router.post("/add-new", async (req, res)=>{
     // log(req.body);
     const exercise = await Exercise.create(req.body);
     exercise.user = user.id;
+    let validURL;
+    console.log(req.body.img)
+    urlExists(req.body.img.toString(), function(err, exists) {
+        console.log(exists);
+    //     if (!exists){
+    //     console.log("invalid url");
+    //     exercise.img = defaultImgURL.toString();
+    // }
+    });
+    
+    
     // console.log("user", exercise.user)
     res.redirect("/exercises")
     }
