@@ -1,5 +1,7 @@
 # Training With Fury
 
+Link to deployed app: https://training-with-fury.onrender.com
+
 ## A workout tracking app 
 This app is created to allow users to view and use pre-loaded workouts as well as create their own to keep track of. 
 Each workout will consist of multiple exercises that they can then see detailed descriptions and photos (or gifs) of. 
