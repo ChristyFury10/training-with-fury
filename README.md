@@ -57,4 +57,4 @@ const premadeWorkoutSchema = new Schema ({
     user: {type: Schema.Types.ObjectId, ref: "User"}
 });
 
-<img src="https://imgur.com/a/NILOERv">
+<img src="https://i.imgur.com/IV6boRN.png">
