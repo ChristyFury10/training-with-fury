@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
-</head>
+<%- include ("../header.ejs") %>
 <body>
-    <form action="/auth/login" method="post">
+  <% if(incorrectInfo) {%>
+    <h3>Invalid Information</h3>
+    <%}%>
+<h2>Login:</h2>
+    <form action="./login" method="post">
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Username</span>
         <input type="text" name="username" placeholder="enter username"/>
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
         <input type="password" name="password" placeholder="enter password"/>
-        <input type="submit" value="login"/>
+      </div>
+      <input type="submit" value="login"/>
     </form>
+
+
 </body>
 </html>

@@ -16,8 +16,11 @@
 
             <br>
             <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="description" placeholder="Enter a description">
-
+            <textarea type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="description" placeholder="Enter a description"></textarea>
+            
+            <% if (user) {%>
+            <input value = "<%=user.id%>" name="user" type="hidden">
+                <%}%>
             <br>
             <input type="submit" value="Add to User List">
         </form>

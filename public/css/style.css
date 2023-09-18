@@ -25,8 +25,13 @@
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   }
 
-#nav{
-    color: pink !important; 
+.disabled{
+    pointer-events: none;
+    float: right;
+}
+
+#nav-username{
+    margin-right: 30px;
 }
 
 .show-img{

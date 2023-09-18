@@ -1,16 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
-</head>
+<%- include ("../header.ejs") %>
+<script>
+  document.getElementById("signupButton")
+</script>
 <body>
-    <form action="/auth/signup" method="post">
+  <% if(takenUsername) {%>
+    <h3>Username already taken</h3>
+    <%}%>
+<h2>Sign-Up:</h2>
+    <form action="/exercises/auth/signup" method="post">
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Username</span>
         <input type="text" name="username" placeholder="enter username"/>
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
         <input type="password" name="password" placeholder="enter password"/>
-        <input type="submit" value="signup"/>
+      </div>
+      <input type="submit" value="signup" id = "signupButton" />
     </form>
+
+ 
+
+
 </body>
 </html>

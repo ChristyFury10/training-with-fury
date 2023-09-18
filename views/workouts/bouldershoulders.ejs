@@ -1,0 +1,20 @@
+<%- include ("../header.ejs") %>
+
+<h3>Boulder Shoulders</h3>
+
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            <%=workout[0].name%>
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+            <p><%=workout[0].description%></p>
+        </div>
+      </div>
+    </div>
+    
+
+  </div>

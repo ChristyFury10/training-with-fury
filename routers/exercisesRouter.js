@@ -1,12 +1,18 @@
 const express = require("express");
 const router = express.Router();
-// const mongoose = require("mongoose");
+const authRouter = require("../routers/authRouter.js");
+const mongoose = require("mongoose");
 const {seedExercises, Workouts} = require("../db/seed.js");
 const Exercise = require("../models/exercise.js");
-const log = (string)=> console.log(string)
+const log = (string)=> console.log(string);
+let user = null;
+var urlExists = require("url-exists")
+
+const defaultImgURL = "https://cdn.pixabay.com/photo/2017/01/31/08/48/barbell-2023339__340.png"
+
 
 //middleware
-// router.use("/auth", authRouter);//
+router.use("/auth", authRouter);
 // router.use("/user", userRouter);
 
 //==============ROUTES============================
@@ -14,34 +20,87 @@ const log = (string)=> console.log(string)
 //INDEX --------------------->
 router.get("/", async (req, res)=>{
     try{
+    let loggedIn = false;
+    let user;
     const exercises = await Exercise.find({});
-    res.render("index.ejs", {exercises})
+    if (req.session.currentUser){
+        loggedIn = true;
+        
+        user = req.session.currentUser;
+        // console.log(user)
+        res.render("index.ejs", {exercises, user, loggedIn});
+        console.log(user)
     }
+    else{
+        res.render("index.ejs", {exercises, loggedIn, user});
+    }
+    
+    }
+    
     catch (error) {
         console.log('error', error)
     }
 });
 
 // seed
-router.get('/seed', async (req, res) => {
-    try{
-	await Exercise.deleteMany({});
-	await Exercise.create(seedExercises);
-	res.redirect('/exercises');
+// router.get('/seed', async (req, res) => {
+//     try{
+// 	await Exercise.deleteMany({});
+// 	await Exercise.create(seedExercises);
+// 	res.redirect('/exercises');
+//     }
+//     catch (error) {
+//         console.log('error', error)
+//     }
+// });
+
+router.get("/usercreated", async (req, res)=>{
+    let loggedIn = false;
+    let user;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+        // console.log(user);
+        exercises = await Exercise.find({"user": req.session.currentUser.id.toString()})
+        // console.log(exercises);
+         res.render("userExercisesIndex.ejs", {user, loggedIn, exercises})
     }
-    catch (error) {
-        console.log('error', error)
+    else{
+        res.render("userExercisesIndex.ejs", {loggedIn})
     }
-});
+    
+})
 
 router.get("/today", (req, res)=>{
-    res.render("today.ejs")
+    let user;
+    let loggedIn = false;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+        console.log(user);
+         res.render("today.ejs", {user,loggedIn})
+    }
+    else{
+        res.render("today.ejs", {loggedIn})
+    }
+   
 })
 
 // NEW ----------------------------->
 router.get("/add-new", async (req, res)=>{
     try{
-    res.render("new.ejs")
+        let user;
+        let loggedIn = false;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+        console.log(user);
+        res.render("new.ejs", {user, loggedIn})
+    }
+    else{
+        res.send("must be logged in to add an exercise")
+    }
+    
     }
     catch (error) {
         console.log('error', error)
@@ -53,8 +112,27 @@ router.get("/add-new", async (req, res)=>{
 //CREATE - AUTHENTICATION  -------------------> NOT READY
 router.post("/add-new", async (req, res)=>{
     try{
-    log(req.body);
+        let loggedIn = false;
+        if (req.session.currentUser){
+            loggedIn = true;
+            user = req.session.currentUser;
+            console.log(user)
+        }
+    // log(req.body);
     const exercise = await Exercise.create(req.body);
+    exercise.user = user.id;
+    // let validURL;
+    // console.log(req.body.img)
+    // urlExists(req.body.img.toString(), function(err, exists) {
+    //     console.log(exists);
+    // //     if (!exists){
+    // //     console.log("invalid url");
+    // //     exercise.img = defaultImgURL.toString();
+    
+    // });
+    
+    
+    // console.log("user", exercise.user)
     res.redirect("/exercises")
     }
     catch (error) {
@@ -66,11 +144,16 @@ router.post("/add-new", async (req, res)=>{
 
 router.get("/:id/edit", async (req, res)=>{
     try{
-    // console.log("------------");
-    // console.log(req);
-    // console.log("------------");
+        
     const exercise = await Exercise.findById(req.params.id)
-    res.render("edit.ejs", {exercise})
+    let loggedIn = false;
+    if (req.session.currentUser){
+        loggedIn = true;
+        user = req.session.currentUser;
+        console.log(user)
+        res.render("edit.ejs", {exercise, loggedIn, user})
+    }
+    
     }
     catch (error) {
         console.log('error', error)
@@ -94,7 +177,15 @@ router.put("/:id", async (req, res)=>{
 router.delete("/:id", async (req, res)=>{
     try{
     const exercise = await Exercise.findByIdAndDelete(req.params.id);
-    res.redirect("/exercises");
+    let loggedIn;
+    if (req.session.currentUser){
+        let user;
+        loggedIn = true;
+        user = req.session.currentUser;
+        console.log(user)
+        res.redirect("/exercises");
+    }
+   
     }
     catch (error) {
         console.log('error', error)
@@ -103,9 +194,18 @@ router.delete("/:id", async (req, res)=>{
 
 router.get("/arms", async (req, res)=>{
     try{
+        let loggedIn = false;
     const armsExercises= await 
     Exercise.find( { $or:[ {'tags': "arms"}, {'tags':"upper-body"} ]});
-    res.render("arms.ejs", {armsExercises})
+    if (req.session.currentUser){
+        let user;
+        loggedIn = true;
+        user = req.session.currentUser;
+        res.render("arms.ejs", {armsExercises, user, loggedIn})
+    }
+    else {
+        res.render("arms.ejs", {armsExercises, loggedIn})
+    }
     }
     catch(err){
         // console.log(err);
@@ -115,9 +215,18 @@ router.get("/arms", async (req, res)=>{
 
 router.get("/legs", async (req, res)=>{
     try{
+        let loggedIn = false;
     const legsExercises= await 
     Exercise.find( { $or:[ {'tags': "legs"}, {'tags':"lower-body"} ]});
-    res.render("legs.ejs", {legsExercises})
+    if (req.session.currentUser){
+        let user;
+        loggedIn = true;
+        user = req.session.currentUser;
+        res.render("legs.ejs", {legsExercises, user, loggedIn})
+    }
+    else {
+        res.render("legs.ejs", {legsExercises, loggedIn})
+    }
     }
     catch (error) {
         console.log('error', error)
@@ -126,9 +235,18 @@ router.get("/legs", async (req, res)=>{
 
 router.get("/core", async (req, res)=>{
     try{
+        let loggedIn = false;
     const coreExercises= await 
     Exercise.find( { $or:[ {'tags': "core"}, {'tags':"abs"} ]});
-    res.render("core.ejs", {coreExercises})
+    if (req.session.currentUser){
+        let user;
+        loggedIn = true;
+        user = req.session.currentUser;
+        res.render("core.ejs", {coreExercises, user, loggedIn})
+    }
+    else {
+        res.render("core.ejs", {coreExercises, loggedIn})
+    }
     }
     catch (error) {
         console.log('error', error)
@@ -138,10 +256,21 @@ router.get("/core", async (req, res)=>{
 
 //SHOW   ----------------->
 router.get("/:id", async (req, res)=>{
-    try{
     const id = req.params.id;
+    let loggedIn = false;
+    let usersExercise = false;
     const exercise = await Exercise.findById(req.params.id)
-    res.render("show.ejs", {exercise, id})
+    try{
+        if (req.session.currentUser){
+            loggedIn = true;
+            user = req.session.currentUser;
+            if(exercise.user){
+            if(exercise.user.id === user.id.toString()){
+                usersExercise = true;
+            }
+        }
+        }
+        res.render("show.ejs", {exercise, id, user, loggedIn, usersExercise})
     }
     catch (error) {
         console.log('error', error)

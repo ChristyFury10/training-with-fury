@@ -7,19 +7,37 @@
         <a class="nav-link active" aria-current="true" href="#">Active</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Progresions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Regressions</a>
       </li>
     </ul>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><%= exercise.name%></h5>
-    <p class="card-text"><%=exercise.description%></p>
-    <img class = "show-img" src="<%=exercise.img%>" >
-    <br>
-    <a href="/exercises/<%= exercise._id %>/edit"><button class="btn">Edit this exercise</button></a>
-    <form action="/exercises/<%= exercise._id %>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete" class="btn"/>
-    </form>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h5 class="card-title"><%= exercise.name%></h5>
+          <% if(exercise.user) {%>
+          <p> Created By: <%= exercise.user.username %></p>
+          <%}%>
+          <p class="card-text"><%=exercise.description%></p>
+          <br>
+          <% if(usersExercise){%>
+          <a href="/exercises/<%= exercise._id %>/edit"><button class="btn">Edit this exercise</button></a>
+          <form action="/exercises/<%= exercise._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" class="btn"/>
+          </form>
+          <%}%>
+        </div>
+        <div class="col-sm">
+          <img class = "show-img" src="<%=exercise.img%>" >
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 

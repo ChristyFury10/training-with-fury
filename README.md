@@ -1,5 +1,7 @@
 # Training With Fury
 
+Link to deployed app: https://training-with-fury.onrender.com
+
 ## A workout tracking app 
 This app is created to allow users to view and use pre-loaded workouts as well as create their own to keep track of. 
 Each workout will consist of multiple exercises that they can then see detailed descriptions and photos (or gifs) of. 
@@ -35,6 +37,8 @@ Individual Exercise: <img src = "https://i.imgur.com/bGUhSUb.jpg.jpg">
 - body part selector
 
 
+
+
 Schemas:
 const premadeExerciseSchema = new Schema ({
     name: String, 
@@ -55,3 +59,4 @@ const premadeWorkoutSchema = new Schema ({
     user: {type: Schema.Types.ObjectId, ref: "User"}
 });
 
+<img src="https://i.imgur.com/IV6boRN.png">
